@@ -1,4 +1,5 @@
 import { AUTH_LOGIN, AUTH_LOGOUT } from '../mutation-types'
+import router from '../../router'
 export default {
   namespaced: true,
   state: () => ({
@@ -21,7 +22,8 @@ export default {
             name: 'hex',
             email: payload.email
         }
-      commit(AUTH_LOGIN, user)
+        router.push('/')
+        commit(AUTH_LOGIN, user)
     },
     logout({ commit }) {
       commit(AUTH_LOGOUT)

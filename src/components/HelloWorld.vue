@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     login () {
-      this.$store.dispatch('auth/login')
+      this.$router.push('/login')
     }
   },
   computed: {
