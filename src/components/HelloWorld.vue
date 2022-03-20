@@ -42,15 +42,15 @@ export default {
   },
   methods: {
     login () {
-      this.$store.dispatch('login')
+      this.$store.dispatch('auth/login')
     }
   },
   computed: {
     isLogin () {
-      return this.$store.state.isLogin
+      return this.$store.state.auth.isLogin
     },
     loginString () {
-      return this.$store.state.isLogin ? 'Logout' : 'Login'
+      return this.$store.state.auth.isLogin ? 'Logout' : 'Login'
     }
   }
 }

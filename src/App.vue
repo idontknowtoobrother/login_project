@@ -16,12 +16,12 @@ export default {
   },
   computed: {
     isLogin () {
-      return this.$store.state.isLogin
+      return this.$store.state.auth.isLogin
     }
   },
   methods: {
     logout () {
-      this.$store.dispatch('logout')
+      this.$store.dispatch('auth/logout')
     }
   }
 }
