@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+    <button v-if="!isLogin" @click="login()">Login</button>
+    <h1>{{ loginString }}</h1>
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -37,6 +39,19 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  methods: {
+    login () {
+      this.$store.dispatch('login')
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
+    },
+    loginString () {
+      return this.$store.state.isLogin ? 'Logout' : 'Login'
+    }
   }
 }
 </script>

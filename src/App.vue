@@ -2,11 +2,30 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <button @click="logout" v-if="isLogin">Logout</button>
     </nav>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {}
+  },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
+    }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
+    }
+  }
+}
+</script>
 
 <style>
 #app {

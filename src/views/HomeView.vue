@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
+    <h1>{{ isLogin }}</h1>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -13,6 +14,11 @@ export default {
   name: 'HomeView',
   components: {
     HelloWorld
+  },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
+    }
   }
 }
 </script>
