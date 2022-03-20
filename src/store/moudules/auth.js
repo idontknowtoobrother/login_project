@@ -2,24 +2,34 @@ import { AUTH_LOGIN, AUTH_LOGOUT } from '../mutation-types'
 export default {
   namespaced: true,
   state: () => ({
-    user: null,
-    isLogin: false
+    user: null
   }),
   mutations: {
-    [AUTH_LOGIN] (state) {
-      state.isLogin = true
+    [AUTH_LOGIN] (state, payload) {
+        state.user = payload
+        // state.isLogin = true
     },
     [AUTH_LOGOUT] (state) {
-      state.isLogin = false
+      state.user = null
     }
   },
   actions: {
     login({ commit }, payload) {
-      commit(AUTH_LOGIN)
+        console.log(payload)
+        // if correct
+        const user = {
+            name: 'hex',
+            email: payload.email
+        }
+      commit(AUTH_LOGIN, user)
     },
     logout({ commit }) {
       commit(AUTH_LOGOUT)
     }
   },
-  getters: {}
+  getters: {
+      isLogin(state, getters) {
+        return state.user != null
+      }
+  }
 }

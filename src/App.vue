@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     isLogin () {
-      return this.$store.state.auth.isLogin
+      return this.$store.getters['auth/isLogin']
     }
   },
   methods: {

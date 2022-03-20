@@ -47,10 +47,10 @@ export default {
   },
   computed: {
     isLogin () {
-      return this.$store.state.auth.isLogin
+      return this.$store.getters['auth/isLogin']
     },
     loginString () {
-      return this.$store.state.auth.isLogin ? 'Logout' : 'Login'
+      return this.$store.getters['auth/isLogin'] ? 'Logout' : 'Login'
     }
   }
 }

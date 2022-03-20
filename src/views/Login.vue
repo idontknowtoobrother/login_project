@@ -49,7 +49,8 @@
                 >
               </b-form>
             </div>
-            {{ $store.state.auth.isLogin }}
+            {{ $store.state.auth.user }}
+            {{ isLogin }}
           </b-card-text>
         </b-card>
       </b-col>
@@ -69,11 +70,16 @@ export default {
       show: true
     }
   },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
+    }
+  },
   methods: {
     onSubmit(event) {
       event.preventDefault()
       // alert(JSON.stringify(this.form))
-      this.$store.dispatch('auth/login')
+      this.$store.dispatch('auth/login', this.form)
     },
     onReset(event) {
       event.preventDefault()
