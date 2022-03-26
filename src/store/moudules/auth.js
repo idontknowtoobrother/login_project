@@ -1,6 +1,7 @@
 import { AUTH_LOGIN, AUTH_LOGOUT } from '../mutation-types'
 import router from '../../router'
-import axios from 'axios'
+import api from '../../services/api'
+
 export default {
   namespaced: true,
   state: () => ({
@@ -18,7 +19,7 @@ export default {
   actions: {
     async login({ commit }, payload) {
       try {
-        const respone = await axios.post('http://localhost:3000/auth/login', {
+        const respone = await api.post('/auth/login', {
           username: payload.email,
           password: payload.password
         })
