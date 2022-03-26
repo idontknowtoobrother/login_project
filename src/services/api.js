@@ -1,5 +1,6 @@
 import router from '@/router'
 import axios from 'axios'
+import store from '../store'
 const api = axios.create({
     baseURL: 'http://localhost:3000',
     headers: {
@@ -37,6 +38,13 @@ api.interceptors.response.use(
                     break
                 case 401:
                     console.log('Session expired')
+                    store.dispatch('auth/logout')
+                    router.replace({
+                        path: '/login',
+                        query: { 
+                            redirect: router.currentRoute.fullPath 
+                        }
+                    })
                     break
                 case 403:
                     router.replace({

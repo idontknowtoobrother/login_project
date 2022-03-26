@@ -8,7 +8,12 @@
 
 <script>
 import Auth from '../components/Auth.vue'
+import { getProducts } from '../services/product'
 export default {
+  async mounted() {
+    const product = await getProducts()
+    console.log(product)
+  },
   components: {
     Auth
   }

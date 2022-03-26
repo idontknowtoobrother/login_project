@@ -1,6 +1,7 @@
 import { AUTH_LOGIN, AUTH_LOGOUT } from '../mutation-types'
 import router from '../../router'
 import api from '../../services/api'
+import { login } from '../../services/auth'
 
 export default {
   namespaced: true,
@@ -9,8 +10,7 @@ export default {
   }),
   mutations: {
     [AUTH_LOGIN] (state, payload) {
-        state.user = payload
-        // state.isLogin = true
+        state.user = JSON.parse(localStorage.getItem('user'))
     },
     [AUTH_LOGOUT] (state) {
       state.user = null
@@ -19,15 +19,12 @@ export default {
   actions: {
     async login({ commit }, payload) {
       try {
-        const respone = await api.post('/auth/login', {
-          username: payload.email,
-          password: payload.password
-        })
+        const respone = await login(payload.email, payload.password)
 
         const user = respone.data.user
         const token = respone.data.token
         localStorage.setItem('token', token)
-        localStorage.setItem('user', user)
+        localStorage.setItem('user', JSON.stringify(user))
 
         router.push('/')
         commit(AUTH_LOGIN, user)
@@ -36,6 +33,8 @@ export default {
       }
     },
     logout({ commit }) {
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
       commit(AUTH_LOGOUT)
     }
   },
