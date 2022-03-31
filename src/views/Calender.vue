@@ -44,7 +44,9 @@
             </b-row>
             <b-row>
                 <b-col>
-                    <vue-cal :locale="th" today-button active-view="week" :events="events" />
+                    <vue-cal :locale="th" today-button active-view="week" :events="events" 
+                    @ready="ready($event)"
+                    @view-change="viewChange( $event)"/>
                 </b-col>
             </b-row>
         </b-container>
@@ -76,6 +78,12 @@ export default {
     }
   },
   methods: {
+    ready(e){
+        console.log('ready', e)
+    },
+    viewChange(e){
+        console.log('view-change', e);
+    },
     addEvent(){
         const event = {
             title: this.title,
