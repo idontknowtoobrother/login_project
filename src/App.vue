@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/product">Product</router-link> |
+      <router-link to="/calendar">Calendar</router-link> |
       <button @click="logout" v-if="isLogin">Logout</button>
     </nav>
     <router-view/>
