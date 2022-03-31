@@ -57,6 +57,8 @@
 import th from '../locales/th'
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
+import api from '../services/api'
+import { getEvents } from '../services/event'
 export default {
   data() {
     return {
@@ -78,11 +80,32 @@ export default {
     }
   },
   methods: {
-    ready(e){
-        console.log('ready', e)
+    mapEvents (res){
+        return res.data.map(function(event){
+            return {
+                title: event.title,
+                content: event.content,
+                start: new Date(event.startDate),
+                end: new Date(event.endDate),
+                class: event.class
+            }
+        })
     },
-    viewChange(e){
-        console.log('view-change', e);
+    async ready(e){
+        const res = await getEvents(e.startDate, e.endDate)
+
+        const newEvents = this.mapEvents(res)
+
+        console.log('ready',newEvents)
+        this.events = newEvents
+    },
+    async viewChange(e){
+        const res = await getEvents(e.startDate, e.endDate)
+        
+        const newEvents = this.mapEvents(res)
+        
+        console.log('view-change', newEvents)
+        this.events = newEvents
     },
     addEvent(){
         const event = {
